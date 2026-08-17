@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@source "../components/originkit";
+
+@font-face {
+  font-family: "Zimula";
+  src: url("/fonts/Zimula.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #201d1d;
+  --foreground: #f2efea;
+  --accent: #f84131;
+  --font-zimula: "Zimula", sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-zimula);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-zimula);
+}
+
+@utility transform-3d {
+  transform-style: preserve-3d;
+}
+
+@utility backface-hidden {
+  backface-visibility: hidden;
+}
+
+@utility inline-box {
+  display: inline-block;
+}
+
