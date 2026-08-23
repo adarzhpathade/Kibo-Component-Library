@@ -1,0 +1,33 @@
+{
+  "name": "Gradient Text",
+  "slug": "gradient-text",
+  "description": "Silky multi-color gradient background sweep traveling continuously across typography with custom speeds and angles.",
+  "version": "1.0.0",
+  "category": "text",
+  "tags": [
+    "text",
+    "animation",
+    "hover"
+  ],
+  "premium": false,
+  "clientOnly": true,
+  "files": [
+    {
+      "source": "component.tsx",
+      "target": "components/kibo/gradient-text/component.tsx"
+    }
+  ],
+  "dependencies": {
+    "motion": "^12.23.12"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "compatibility": {
+    "react": ">=18",
+    "next": ">=14",
+    "typescript": true,
+    "tailwind": ">=4"
+  }
+}

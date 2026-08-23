@@ -1,0 +1,33 @@
+{
+  "name": "Stroke Text",
+  "slug": "stroke-text",
+  "description": "Vector outline drawing animation sketching letter paths with SVG stroke-dashoffset transitions on scroll.",
+  "version": "1.0.0",
+  "category": "text",
+  "tags": [
+    "text",
+    "animation",
+    "scroll"
+  ],
+  "premium": false,
+  "clientOnly": true,
+  "files": [
+    {
+      "source": "component.tsx",
+      "target": "components/kibo/stroke-text/component.tsx"
+    }
+  ],
+  "dependencies": {
+    "gsap": "^3.13.0"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "compatibility": {
+    "react": ">=18",
+    "next": ">=14",
+    "typescript": true,
+    "tailwind": ">=4"
+  }
+}

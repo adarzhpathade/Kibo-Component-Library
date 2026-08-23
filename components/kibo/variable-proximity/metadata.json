@@ -1,0 +1,33 @@
+{
+  "name": "Variable Proximity",
+  "slug": "variable-proximity",
+  "description": "Variable font weight and optical size interpolation fluidly responding to cursor distance across individual letters.",
+  "version": "1.0.0",
+  "category": "text",
+  "tags": [
+    "text",
+    "animation",
+    "hover"
+  ],
+  "premium": false,
+  "clientOnly": true,
+  "files": [
+    {
+      "source": "component.tsx",
+      "target": "components/kibo/variable-proximity/component.tsx"
+    }
+  ],
+  "dependencies": {
+    "motion": "^12.23.12"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "compatibility": {
+    "react": ">=18",
+    "next": ">=14",
+    "typescript": true,
+    "tailwind": ">=4"
+  }
+}

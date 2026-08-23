@@ -1,0 +1,33 @@
+{
+  "name": "Scroll Velocity",
+  "slug": "scroll-velocity",
+  "description": "Infinite bi-directional marquee text banners accelerating and decelerating dynamically based on page scroll velocity.",
+  "version": "1.0.0",
+  "category": "text",
+  "tags": [
+    "text",
+    "animation",
+    "scroll"
+  ],
+  "premium": false,
+  "clientOnly": true,
+  "files": [
+    {
+      "source": "component.tsx",
+      "target": "components/kibo/scroll-velocity/component.tsx"
+    }
+  ],
+  "dependencies": {
+    "motion": "^12.23.12"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "compatibility": {
+    "react": ">=18",
+    "next": ">=14",
+    "typescript": true,
+    "tailwind": ">=4"
+  }
+}

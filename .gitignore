@@ -45,3 +45,6 @@ next-env.d.ts
 .agents/
 assests/designs/
 memory.md
+
+# Large Assets
+public/preview/*.mp4

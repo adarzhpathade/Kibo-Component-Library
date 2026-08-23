@@ -2,10 +2,10 @@ import { BlurText } from "./component";
 
 export default function BlurTextDemo() {
   return (
-    <div className="flex h-[400px] w-full items-center justify-center bg-neutral-950 px-4">
+    <div className="flex h-full w-full w-full items-center justify-center bg-transparent px-4">
       <BlurText
         text="Experience motion like never before."
-        className="text-4xl font-semibold text-white md:text-5xl lg:text-6xl"
+        className="text-2xl sm:text-3xl font-medium text-white text-center"
         delay={150}
         direction="top"
         animateBy="words"

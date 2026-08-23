@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -10,7 +10,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 const categories = [
-  { name: "Text Animations", count: 81, href: "/docs/text-animations" },
+  { name: "Text Animations", count: 12, href: "/docs/text-animations" },
   { name: "Animations", count: 30, href: "/docs/animations" },
   { name: "Components", count: 56, href: "/docs/components" },
   { name: "Backgrounds", count: 25, href: "/docs/backgrounds" },
@@ -41,8 +41,8 @@ function DotGrid({ onClick, isOpen }: { onClick: () => void; isOpen: boolean }) 
 }
 
 export function Sidebar() {
-  const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(true);
   const { play } = useClickSound();
   
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,7 +52,7 @@ export function Sidebar() {
   const { contextSafe } = useGSAP(() => {
     if (!isOpen) {
       gsap.set(panelRef.current, { xPercent: 120 });
-      gsap.set(".kibo-prelayer", { xPercent: 120, opacity: 1 });
+      gsap.set(".kibo-prelayer", { xPercent: 120, opacity: 0 });
       gsap.set(".sidebar-link-item", { y: 20, opacity: 0 });
     } else {
       gsap.set(panelRef.current, { xPercent: 0 });
@@ -62,7 +62,7 @@ export function Sidebar() {
   }, { scope: containerRef });
 
   const toggleMenu = useCallback((targetState: boolean) => {
-    if (isAnimating.current || targetState === isOpen) return;
+    if (isAnimating.current) return;
     
     isAnimating.current = true;
     setIsOpen(targetState);
@@ -73,61 +73,76 @@ export function Sidebar() {
       const preLayers = gsap.utils.toArray(".kibo-prelayer") as HTMLElement[];
       const links = gsap.utils.toArray(".sidebar-link-item") as HTMLElement[];
     
-    if (targetState) {
-      // Opening Animation
-      gsap.set(panel, { xPercent: 120 });
-      gsap.set(preLayers, { xPercent: 120, opacity: 1 });
-      gsap.set(links, { y: 20, opacity: 0 });
-      
-      const tl = gsap.timeline({
-        onComplete: () => { 
-          isAnimating.current = false; 
-          gsap.set(preLayers, { opacity: 0 });
-        }
-      });
-      
-      tl.to(preLayers, {
-        xPercent: 0,
-        duration: 0.5,
-        ease: "power4.out",
-        stagger: 0.08
-      });
-      
-      tl.to(panel, {
-        xPercent: 0,
-        duration: 0.45,
-        ease: "power4.out"
-      }, "-=0.45");
-      
-      tl.to(links, {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power3.out",
-        stagger: 0.05
-      }, "-=0.3");
-      
-    } else {
-      // Closing Animation
-      gsap.set(preLayers, { opacity: 1 });
+      if (targetState) {
+        // Opening Animation
+        gsap.set(panel, { xPercent: 120 });
+        gsap.set(preLayers, { xPercent: 120, opacity: 1 });
+        gsap.set(links, { y: 20, opacity: 0 });
+        
+        const tl = gsap.timeline({
+          onComplete: () => { 
+            isAnimating.current = false; 
+            gsap.set(preLayers, { opacity: 0 });
+          }
+        });
+        
+        tl.to(preLayers, {
+          xPercent: 0,
+          duration: 0.5,
+          ease: "power4.out",
+          stagger: 0.08
+        });
+        
+        tl.to(panel, {
+          xPercent: 0,
+          duration: 0.45,
+          ease: "power4.out"
+        }, "-=0.45");
+        
+        tl.to(links, {
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          ease: "power3.out",
+          stagger: 0.04
+        }, "-=0.3");
+        
+      } else {
+        // Closing Animation
+        gsap.set(preLayers, { opacity: 1 });
 
-      const tl = gsap.timeline({
-        onComplete: () => { 
-          isAnimating.current = false; 
-          gsap.set(links, { y: 20, opacity: 0 });
-        }
-      });
-      
-      const allLayers = [panel, ...preLayers.slice().reverse()];
-      tl.to(allLayers, {
-        xPercent: 120,
-        duration: 0.4,
-        ease: "power3.inOut",
-        stagger: 0.04
-      });
-    }
+        const tl = gsap.timeline({
+          onComplete: () => { 
+            isAnimating.current = false; 
+            gsap.set(links, { y: 20, opacity: 0 });
+          }
+        });
+        
+        const allLayers = [panel, ...preLayers.slice().reverse()];
+        tl.to(allLayers, {
+          xPercent: 120,
+          duration: 0.4,
+          ease: "power3.inOut",
+          stagger: 0.04
+        });
+      }
     })();
-  }, [contextSafe, isOpen, play]);
+  }, [contextSafe, play]);
+
+  // Sync html and body class for main content push animation
+  useEffect(() => {
+    if (!isOpen) {
+      document.documentElement.classList.add("sidebar-closed");
+      document.body.classList.add("sidebar-closed");
+    } else {
+      document.documentElement.classList.remove("sidebar-closed");
+      document.body.classList.remove("sidebar-closed");
+    }
+  }, [isOpen]);
+
+  const handleLinkClick = () => {
+    play();
+  };
 
   return (
     <div ref={containerRef}>
@@ -136,7 +151,7 @@ export function Sidebar() {
         <DotGrid onClick={() => toggleMenu(!isOpen)} isOpen={isOpen} />
       </div>
 
-      {/* Mobile Backdrop */}
+      {/* Mobile Backdrop only */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-30 sm:hidden transition-opacity"
@@ -155,7 +170,7 @@ export function Sidebar() {
       {/* Sidebar */}
       <aside
         ref={panelRef}
-        className="fixed z-50 flex flex-col bg-[#151314] top-0 right-0 h-screen w-full sm:w-[320px] sm:top-6 sm:right-6 sm:bottom-6 sm:h-auto sm:rounded-[5px] sm:shadow-2xl"
+        className="fixed z-50 flex flex-col bg-[#151314] top-0 right-0 h-screen w-full sm:w-[320px] sm:top-6 sm:right-6 sm:bottom-6 sm:h-auto sm:rounded-[5px] shadow-2xl"
       >
         {/* Header — Logo (Toggle button is fixed above) */}
         <div className="flex items-center justify-start pl-[12px] pr-[24px] mt-[24px] h-[48px] shrink-0">
@@ -172,7 +187,7 @@ export function Sidebar() {
         <nav className="flex flex-col gap-[12px] pl-[24px] mt-[20px] sm:mt-[32px]">
           <Link
             href="/docs/introduction"
-            onClick={play}
+            onClick={handleLinkClick}
             className={`sidebar-link-item text-[24px] leading-none transition-opacity duration-200 hover:opacity-100 ${pathname === "/docs/introduction" ? "text-accent" : "text-[var(--foreground)] opacity-80"}`}
           >
             <Text3DFlip 
@@ -187,7 +202,7 @@ export function Sidebar() {
           </Link>
           <Link
             href="/docs/installation"
-            onClick={play}
+            onClick={handleLinkClick}
             className={`sidebar-link-item text-[24px] leading-none transition-opacity duration-200 hover:opacity-100 ${pathname === "/docs/installation" ? "text-accent" : "text-[var(--foreground)] opacity-60"}`}
           >
             <Text3DFlip 
@@ -213,7 +228,7 @@ export function Sidebar() {
             <Link
               key={cat.name}
               href={cat.href}
-              onClick={play}
+              onClick={handleLinkClick}
               className={`sidebar-link-item flex items-start gap-[10px] text-[20px] sm:text-[24px] leading-none transition-opacity duration-200 hover:opacity-100 ${pathname === cat.href ? "text-accent" : "text-[var(--foreground)] opacity-80"}`}
             >
               <Text3DFlip 
@@ -242,9 +257,9 @@ export function Sidebar() {
           <span className="sidebar-link-item text-[var(--foreground)] font-black text-[18px] leading-none tracking-wide">
             Adarz
           </span>
-          <div className="sidebar-link-item flex items-center gap-[12px]">
+          <div className="sidebar-link-item flex items-center gap-[6px]">
             <div 
-              className="w-[12px] h-[12px] rounded-full bg-[var(--foreground)] cursor-pointer hover:opacity-80 transition-opacity" 
+              className="w-[12px] h-[12px] rounded-full bg-[var(--foreground)] opacity-40 cursor-pointer hover:opacity-100 transition-opacity" 
               title="Toggle Theme"
             />
             <button 

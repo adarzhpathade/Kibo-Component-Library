@@ -2,8 +2,8 @@ import { TextPressure } from "./component";
 
 export default function TextPressureDemo() {
   return (
-    <div className="flex h-[400px] w-full items-center justify-center bg-neutral-950 p-8">
-      <div className="relative h-[200px] w-full rounded-2xl bg-neutral-900 p-8 shadow-inner overflow-hidden border border-neutral-800">
+    <div className="relative flex h-full w-full items-center justify-center bg-transparent p-4 overflow-hidden">
+      <div className="relative h-[160px] sm:h-[180px] w-full overflow-hidden">
         <TextPressure
           text="PRESSURE"
           flex={true}

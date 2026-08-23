@@ -1,0 +1,33 @@
+{
+  "name": "Text Type",
+  "slug": "text-type",
+  "description": "Realistic mechanical typing and backspacing animation with blinking cursor, variable typing speeds, and pauses.",
+  "version": "1.0.0",
+  "category": "text",
+  "tags": [
+    "text",
+    "animation",
+    "scroll"
+  ],
+  "premium": false,
+  "clientOnly": true,
+  "files": [
+    {
+      "source": "component.tsx",
+      "target": "components/kibo/text-type/component.tsx"
+    }
+  ],
+  "dependencies": {
+    "gsap": "^3.13.0"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "compatibility": {
+    "react": ">=18",
+    "next": ">=14",
+    "typescript": true,
+    "tailwind": ">=4"
+  }
+}

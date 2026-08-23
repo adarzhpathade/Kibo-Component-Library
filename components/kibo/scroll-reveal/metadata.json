@@ -1,0 +1,33 @@
+{
+  "name": "Scroll Reveal",
+  "slug": "scroll-reveal",
+  "description": "Progressive word-by-word opacity and blur reveal anchored to scroll position with customizable thresholds.",
+  "version": "1.0.0",
+  "category": "text",
+  "tags": [
+    "text",
+    "animation",
+    "scroll"
+  ],
+  "premium": false,
+  "clientOnly": true,
+  "files": [
+    {
+      "source": "component.tsx",
+      "target": "components/kibo/scroll-reveal/component.tsx"
+    }
+  ],
+  "dependencies": {
+    "gsap": "^3.13.0"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "compatibility": {
+    "react": ">=18",
+    "next": ">=14",
+    "typescript": true,
+    "tailwind": ">=4"
+  }
+}

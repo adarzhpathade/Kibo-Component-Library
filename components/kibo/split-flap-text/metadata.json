@@ -1,0 +1,32 @@
+{
+  "name": "Split Flap Text",
+  "slug": "split-flap-text",
+  "description": "Tactile mechanical departure board text animation simulating retro split-flap display transitions.",
+  "version": "1.0.0",
+  "category": "text",
+  "tags": [
+    "text",
+    "animation",
+    "click",
+    "hover"
+  ],
+  "premium": false,
+  "clientOnly": true,
+  "files": [
+    {
+      "source": "component.tsx",
+      "target": "components/kibo/split-flap-text/component.tsx"
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "compatibility": {
+    "react": ">=18",
+    "next": ">=14",
+    "typescript": true,
+    "tailwind": ">=4"
+  }
+}

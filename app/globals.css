@@ -42,3 +42,15 @@ body {
   display: inline-block;
 }
 
+/* Sidebar animation sync for main content */
+@media (min-width: 1024px) {
+  #main-content {
+    transition: padding-right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  html.sidebar-closed #main-content,
+  body.sidebar-closed #main-content {
+    padding-right: 0 !important;
+    transition: padding-right 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+}
