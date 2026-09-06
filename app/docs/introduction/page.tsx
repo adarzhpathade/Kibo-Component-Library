@@ -23,7 +23,7 @@ export default function IntroductionPage() {
         {/* Intro Text */}
         <section className="flex flex-col gap-[16px] text-[15px] sm:text-[16px] leading-[1.6] text-[var(--foreground)] opacity-70">
           <p>
-            Kibo UI is not just another component library. It is a collection of meticulously crafted, animation-heavy, premium React components designed to elevate your application's user experience.
+            Kibo UI is not just another component library. It is a collection of meticulously crafted, animation-heavy, premium React components designed to elevate your application&apos;s user experience.
           </p>
           <p>
             Instead of hiding behind opaque npm packages, Kibo distributes its components via source code. When you add a Kibo component, the actual source code is injected directly into your project. You own the code, you customize the styles, and you control the behavior.
